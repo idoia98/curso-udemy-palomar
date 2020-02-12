@@ -15,14 +15,25 @@ class Hello extends Component {
 
 class Text extends Component {
   render() {
-    const textoSegunBool = this.props.boolean ? 'On' : 'Off'
-    const mappedNumbers = this.props.arrayOfNumbers.map(n => n * 2)
+    const {
+      isActivate,
+      arrayOfNumbers,
+      multiplay,
+      objectWithInfo,
+      title
+    } = this.props
+
+    const textoSegunBool = isActivate ? 'On' : 'Off'
+    const mappedNumbers = this.props.arrayOfNumbers.map(this.props.multiplay)
+
     return <div>
       <p>{this.props.text}</p>
       <p>{this.props.number}</p>
+
       <p>{textoSegunBool}</p>
       <p>{mappedNumbers.join(', ')}</p>
-      <p>{this.props.objectWithInfo.key}</p>
+      <p>{objectWithInfo.key}</p>
+      {title}
     </div>
   }
 }
@@ -34,11 +45,13 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <Hello titulo="Hello from props" />
         <Text
-          arrayOfNumbers={[2,3,10]}
-          objectWithInfo={{key:'First value', key2: 'otherValue'}}
+          arrayOfNumbers={[2, 3, 10]}
+          objectWithInfo={{ key: 'First value', key2: 'otherValue' }}
           number={2}
           text="Texto en string"
-          isActivate 
+          isActivate
+          multiplay={(number) => number * 4}
+          title={<Hello titulo="lo que queremos"/>}
         />
         <p>
           Edit <code>src/App.js</code> and save to reload.
